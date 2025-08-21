@@ -3,19 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моя ферма</title>
+    <title>EcoFarm</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding-top: 50px;
+            padding: 20px;
             background-color: #f0f8f0;
             color: #333;
+        }
+        #game-info {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1>Добро пожаловать на ферму! 🌾</h1>
-    <p>Это твоя первая HTML-страница Web App.</p>
-</body>
-</html>
+    <h1>EcoFarm 🚜</h1>
+    <div id="game-info">
+        <p>Монет: <span id="money">...</span></p>
+    </div>
+    
+    <button onclick="plantTomatoes()">Посадить помидоры (10 монет) 🍅</button>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        if (Telegram.WebApp) {
+            Telegram.WebApp.ready();
+
+            // Получаем URL-параметры, чтобы узнать баланс
+            const urlParams = new URLSearchParams(window.location.search);
+            const money = urlParams.get('money');
+
+            // Отображаем деньги на странице
+            if (money) {
+                document.getElementById('money').textContent = money;
+            }
+
+            // Функция, которая вызывается при нажатии на кнопку
+            function plantTomatoes() {
+                // Закрываем Web App и отправляем
